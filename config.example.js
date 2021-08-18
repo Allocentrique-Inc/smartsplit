@@ -17,7 +17,7 @@ module.exports = {
 
 	listen: {
 		port: 3001,
-		host: '::1',
+		host: '::',
 	},
 
 	logger: true,
