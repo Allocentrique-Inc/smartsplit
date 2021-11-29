@@ -151,6 +151,7 @@ const UserSchema = new mongoose.Schema(
 			type: [String],
 			ref: 'User',
 		},
+		zumId: String,
 	},
 	{ toJSON: { virtuals: true }, toObject: { virtuals: true } }
 )

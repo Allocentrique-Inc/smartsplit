@@ -1,4 +1,4 @@
-const Transaction = require('../models/transaction')
+const Transaction = require('../models/dbTransaction')
 
 function onRequest(req, res, next) {
 	const transaction = new Transaction({
@@ -9,7 +9,7 @@ function onRequest(req, res, next) {
 			authorisation: req.headers.authorization,
 			userAgent: req.headers['user-agent'],
 			params: req.params,
-			querystring: req.querystring,
+			querystring: req.query,
 		},
 	})
 	req.transaction = transaction

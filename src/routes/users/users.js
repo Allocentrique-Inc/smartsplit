@@ -6,6 +6,7 @@ const AuthSchema = require('../../schemas/auth')
 const AccountStatus = require('../../constants/accountStatus')
 const Errors = require('../../errors')
 const JWTAuth = require('../../service/JWTAuth')
+const zumrails = require('../../service/zumrails')
 
 /************************ Routes ************************/
 
@@ -124,6 +125,29 @@ async function routes(fastify, options) {
 		},
 		preValidation: JWTAuth.authorizeUserAccess,
 		handler: updateUser,
+	})
+
+	fastify.route({
+		method: 'PUT',
+		url: '/users/:user_id/zumId',
+		schema: {
+			tags: ['users'],
+			description: 'Link a zumrails user ID to a smartsplit user',
+			body: {
+				type: 'object',
+				required: ['zumId'],
+				properties: {
+					zumId: { type: 'string' },
+				},
+				additionalProperties: false,
+			},
+			response: {
+				200: UserSchema.serialization.user,
+			},
+			security: [{ bearerAuth: [] }],
+		},
+		preValidation: JWTAuth.authorizeUserAccess,
+		handler: linkUserToZumId,
 	})
 
 	fastify.route({
@@ -365,6 +389,13 @@ async function deleteUserAccount(req, res) {
 	await user.deleteAccount()
 
 	res.code(204).send()
+}
+
+async function linkUserToZumId(req, res) {
+	const user = await getUserWithAuthorization(req)
+	await zumrails.getUserById(req.body.zumId)
+	user.zumId = req.body.zumId
+	return await user.save()
 }
 
 module.exports = {

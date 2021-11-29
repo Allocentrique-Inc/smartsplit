@@ -2,20 +2,26 @@ const uuid = require('uuid').v4
 const mongoose = require('mongoose')
 const User = require('./user')
 
-const TransactionSchema = new mongoose.Schema(
+const StockSchema = new mongoose.Schema(
 	{
 		_id: {
 			type: String,
 			default: uuid,
 		},
-		amount: Number,
+		name: String,
 		type: {
 			type: String,
 			enum: ['SOCAN', 'SOPROQ'],
 		},
+		description: String,
+		totalPrice: Number,
+		availableShares: Number,
+		isPublished: {
+			type: Boolean,
+			default: false,
+		},
 		ownerId: {
 			type: String,
-			required: true,
 			validate: function validator(val) {
 				return User.ensureExists(val)
 			},
@@ -24,7 +30,7 @@ const TransactionSchema = new mongoose.Schema(
 	{ timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 )
 
-TransactionSchema.virtual('owner', {
+StockSchema.virtual('owner', {
 	ref: 'User',
 	localField: 'ownerId',
 	foreignField: '_id',
@@ -32,4 +38,4 @@ TransactionSchema.virtual('owner', {
 	autopopulate: true,
 })
 
-module.exports = mongoose.model('Transaction', TransactionSchema)
+module.exports = mongoose.model('Stock', StockSchema)

@@ -43,6 +43,14 @@ const DefaultConfig = {
 	},
 
 	logger: true,
+
+	zumrails: {
+		apiUsername: '',
+		apiPassword: '',
+		walletId: '',
+		fundingSourceId: '',
+		env: 'https://api-sandbox.zumrails.com',
+	},
 }
 
 try {
