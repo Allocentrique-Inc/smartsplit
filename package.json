@@ -9,7 +9,7 @@
 	"dependencies": {
 		"@sendgrid/mail": "^7.0.0",
 		"bcrypt": "^5.0.0",
-		"fastify": "^3.3.0",
+		"fastify": "^3.29.4",
 		"fastify-cors": "^4.1.0",
 		"fastify-formbody": "^4.0.3",
 		"fastify-multipart": "^3.3.1",
