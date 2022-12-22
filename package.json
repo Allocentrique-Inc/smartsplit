@@ -16,7 +16,7 @@
 		"fastify-oas": "^3.0.3",
 		"fastify-swagger": "^3.3.0",
 		"http-errors": "^1.8.0",
-		"jsonwebtoken": "^8.5.1",
+		"jsonwebtoken": "^9.0.0",
 		"mongoose": "^5.9.7",
 		"mongoose-autopopulate": "^0.12.3",
 		"nodemon": "^2.0.7",
